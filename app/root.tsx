@@ -7,6 +7,8 @@ import {
 } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/react/dist/routeModules";
 import tailwindCss from "~/tailwind.css?url";
+// Supports weights 100-900
+import "@fontsource-variable/inter";
 
 export const links: LinksFunction = () => [
   { href: tailwindCss, rel: "stylesheet" },
@@ -32,8 +34,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="px-4 lg:max-w-[55rem] mx-auto">
-      <Outlet />;
+    <div className="px-4 lg:max-w-[55rem] mx-auto font-inter">
+      <Outlet />
     </div>
   );
 }
