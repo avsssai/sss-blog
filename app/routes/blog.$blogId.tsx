@@ -1,11 +1,21 @@
 import React from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { buildBlog } from "~/utils/buildBlog.server";
-import { fromJSON } from "postcss";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs } from "react-router";
 import { getFileFromSlug } from "~/utils/getFileFromFs.server";
-import { useRouteError, isRouteErrorResponse } from "@remix-run/react";
+import {
+  useRouteError,
+  isRouteErrorResponse,
+  useNavigate,
+} from "@remix-run/react";
+import Prism from "prismjs";
+import prismTheme from "prismjs/themes/prism.css";
+import { LinksFunction } from "@remix-run/node";
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: prismTheme }];
+};
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const blogSlug = params.blogId;
@@ -17,15 +27,25 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Error("Error loading mdx data.");
   }
   const { code, frontmatter } = await buildBlog(mdxSource.fileContent);
-  return { code, frontmatter };
+  return { code, frontmatter, blogSlug };
 };
+
 export default function BlogPost() {
-  const { code, frontmatter } = useLoaderData<typeof loader>();
+  const { code, frontmatter, blogSlug } = useLoaderData<typeof loader>();
   const title = frontmatter.meta[0].title;
   const description = frontmatter.meta[1].description;
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    import("prismjs").then((Prism) => {
+      Prism.highlightAll();
+    });
+  }, [blogSlug]);
   return (
     <section className="mt-8">
+      <Link to={"#"} onClick={() => navigate(-1)}>
+        Back
+      </Link>
       <header>
         <h1 className="text-4xl font-black mb-2">{title}</h1>
         <p className="text-xl mb-4">{description}</p>

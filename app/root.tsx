@@ -7,6 +7,7 @@ import {
 } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/react/dist/routeModules";
 import tailwindCss from "~/tailwind.css?url";
+
 // Supports weights 100-900
 import "@fontsource-variable/inter";
 

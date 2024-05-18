@@ -1,4 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+// app/root.tsx
+import { json, MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { getAllBlogsData } from "~/utils/getBlogs.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,7 +10,17 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  const blogs = await getAllBlogsData();
+  if (!blogs) {
+    throw new Response("Error loading blogs", { status: 400 });
+  }
+
+  return json(blogs);
+};
+
 export default function Index() {
+  const blogs = useLoaderData<typeof loader>();
   return (
     <div className="mt-8">
       <div className="border-1 shadow-lg rounded-md p-4 max-w-[400px]">
@@ -18,6 +31,17 @@ export default function Index() {
           tailwind and Remix is my current stack.
         </p>
       </div>
+      <ul>
+        {blogs.map((blogData) => {
+          return (
+            <li key={blogData?.data.slug}>
+              <Link to={`/blog/${blogData?.data.slug}`}>
+                {blogData?.data.title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
