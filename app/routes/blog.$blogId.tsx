@@ -9,14 +9,8 @@ import {
   isRouteErrorResponse,
   useNavigate,
 } from "@remix-run/react";
-// import Prism from "prismjs";
-import prismTheme from "prismjs/themes/prism-dark.css?url";
 
 import { LinksFunction } from "@remix-run/node";
-
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: prismTheme }];
-};
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const blogSlug = params.blogId;
@@ -37,18 +31,7 @@ export default function BlogPost() {
   const description = frontmatter.meta[1].description;
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
   const navigate = useNavigate();
-  // React.useEffect(() => {
-  //   import("prismjs").then((Prism) => {
-  //     Prism.highlightAll();
 
-  //   });
-  // }, [blogSlug]);
-  useEffect(() => {
-    (async () => {
-      const Prism = await import("prismjs");
-      Prism.highlightAll();
-    })();
-  }, [code]);
   return (
     <section className="mt-8">
       <Link to={"#"} onClick={() => navigate(-1)}>

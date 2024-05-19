@@ -1,16 +1,16 @@
 import { LinksFunction } from "@remix-run/node";
 import { bundleMDX } from "mdx-bundler";
-import remarkPrism from "remark-prism";
+import rehypeHighlight from "rehype-highlight";
 
 export async function buildBlog(filePath: string) {
   const res = await bundleMDX({
     source: filePath,
     mdxOptions: (options) => {
-      options.remarkPlugins = [
-        ...(options.remarkPlugins ?? []),
-        [remarkPrism, { plugins: ["line-numbers"] }],
+      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeHighlight,
       ];
-      options.rehypePlugins = [...(options.rehypePlugins ?? [])];
       return options;
     },
   });
