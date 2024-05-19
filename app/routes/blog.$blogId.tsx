@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
 import { buildBlog } from "~/utils/buildBlog.server";
 import { Link, useLoaderData } from "@remix-run/react";
@@ -9,8 +9,9 @@ import {
   isRouteErrorResponse,
   useNavigate,
 } from "@remix-run/react";
-import Prism from "prismjs";
-import prismTheme from "prismjs/themes/prism.css";
+// import Prism from "prismjs";
+import prismTheme from "prismjs/themes/prism-dark.css?url";
+
 import { LinksFunction } from "@remix-run/node";
 
 export const links: LinksFunction = () => {
@@ -36,11 +37,18 @@ export default function BlogPost() {
   const description = frontmatter.meta[1].description;
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
   const navigate = useNavigate();
-  React.useEffect(() => {
-    import("prismjs").then((Prism) => {
+  // React.useEffect(() => {
+  //   import("prismjs").then((Prism) => {
+  //     Prism.highlightAll();
+
+  //   });
+  // }, [blogSlug]);
+  useEffect(() => {
+    (async () => {
+      const Prism = await import("prismjs");
       Prism.highlightAll();
-    });
-  }, [blogSlug]);
+    })();
+  }, [code]);
   return (
     <section className="mt-8">
       <Link to={"#"} onClick={() => navigate(-1)}>

@@ -6,10 +6,11 @@ export async function buildBlog(filePath: string) {
   const res = await bundleMDX({
     source: filePath,
     mdxOptions: (options) => {
-      options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkPrism];
-      // options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkPrism];
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        [remarkPrism, { plugins: ["line-numbers"] }],
+      ];
       options.rehypePlugins = [...(options.rehypePlugins ?? [])];
-
       return options;
     },
   });

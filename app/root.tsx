@@ -7,12 +7,14 @@ import {
 } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/react/dist/routeModules";
 import tailwindCss from "~/tailwind.css?url";
+import prismTheme from "prismjs/themes/prism-dark.css?url";
 
 // Supports weights 100-900
 import "@fontsource-variable/inter";
 
 export const links: LinksFunction = () => [
   { href: tailwindCss, rel: "stylesheet" },
+  { rel: "stylesheet", href: prismTheme },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
