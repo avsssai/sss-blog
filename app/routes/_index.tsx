@@ -23,25 +23,30 @@ export default function Index() {
   const blogs = useLoaderData<typeof loader>();
   return (
     <div className="mt-8">
-      <div className="border-1 shadow-lg rounded-md p-4 max-w-[400px]">
+      <div className="border-1 mx-auto rounded-md p-4 max-w-[400px]">
         <div className="rounded-full bg-gray w-[150px] h-[150px] bg-gray-500 mx-auto"></div>
-        <h1 className="font-black text-xl text-center mt-8">Shiva Sesha Sai</h1>
-        <p className="text-center">
+        <h1 className="font-black text-3xl text-center mt-8 mb-4">
+          Shiva Sesha Sai
+        </h1>
+        <p className="text-center text-xl">
           Full stack web developer. Juggling React frameworks. Typescript,
           tailwind and Remix is my current stack.
         </p>
       </div>
-      <ul>
-        {blogs.map((blogData) => {
-          return (
-            <li key={blogData?.data.slug}>
-              <Link to={`/blog/${blogData?.data.slug}`}>
-                {blogData?.data.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="p-4 my-8">
+        <ul>
+          {blogs.map((blogData) => {
+            return (
+              <li key={blogData?.data.slug} className="text-xl font-bold p-4">
+                <Link to={`/blog/${blogData?.data.slug}`}>
+                  <h3>{blogData?.data.title}</h3>
+                  <p>{blogData?.data.description}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

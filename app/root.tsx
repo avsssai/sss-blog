@@ -8,7 +8,7 @@ import {
 import tailwindCss from "~/tailwind.css?url";
 
 // Supports weights 100-900
-import "@fontsource-variable/inter";
+import "@fontsource-variable/roboto-mono";
 import { LinksFunction } from "@remix-run/node";
 
 export const links: LinksFunction = () => [
@@ -35,7 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="px-4 lg:max-w-[55rem] mx-auto font-inter">
+    <div className="px-4 lg:max-w-[55rem] mx-auto font-mono">
       <Outlet />
     </div>
   );

@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         inter: "'Inter Variable', sans-serif",
+        mono: "'Roboto Mono Variable', monospace",
       },
     },
   },

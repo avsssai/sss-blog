@@ -1,1 +1,88 @@
-@import "prismjs/themes/prism-tomorrow.css"; /* Or any other Prism theme */
+/* Include this in your global CSS file or import it in your component */
+
+/* PrismJS or any other theme for syntax highlighting */
+@import "https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css";
+
+/* Custom styles for code blocks */
+pre {
+  position: relative;
+  padding: 1em;
+  margin: 1em 0;
+  overflow-x: auto; /* Horizontal scroll */
+  overflow-y: hidden; /* Hide vertical scroll */
+  border-radius: 8px;
+  background: #2d2d2d;
+  border: 1px solid #ddd;
+  font-size: 0.875em;
+  line-height: 1.5;
+}
+
+/* Line numbers */
+pre code {
+  counter-reset: line-number;
+  position: relative; /* Adjust position */
+}
+
+pre code > span {
+  display: block;
+  counter-increment: line-number;
+  position: relative;
+  padding-left: 3.5em;
+}
+
+pre code > span::before {
+  content: counter(line-number);
+  position: absolute;
+  left: 0;
+  width: 3em;
+  padding-right: 0.5em;
+  border-right: 1px solid #ddd;
+  color: #888;
+  text-align: right;
+}
+
+/* Highlighted lines */
+.line--highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Highlighted words */
+.word--highlighted {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* Language label */
+pre::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #333;
+  color: #fff;
+  font-size: 0.75em;
+  padding: 0.25em 0.5em;
+  border-bottom-left-radius: 8px;
+}
+
+/* Add data-language attribute for language */
+pre.language-javascript::before {
+  content: "JavaScript";
+}
+
+pre.language-css::before {
+  content: "CSS";
+}
+
+pre.language-html::before {
+  content: "HTML";
+}
+
+/* Add more languages as needed */
+
+pre.language-typescript::before {
+  content: "TypeScript";
+}
+
+/* Add more languages as needed */

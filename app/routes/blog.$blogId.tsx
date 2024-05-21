@@ -9,8 +9,12 @@ import {
   isRouteErrorResponse,
   useNavigate,
 } from "@remix-run/react";
-
 import { LinksFunction } from "@remix-run/node";
+import codeStyles from "~/styles/codeHighlight.css?url";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: codeStyles },
+];
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const blogSlug = params.blogId;
