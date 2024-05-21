@@ -42,7 +42,7 @@ export default function BlogPost() {
         Back
       </Link>
       <header>
-        <h1 className="text-4xl font-black mb-2">{title}</h1>
+        <h1 className="text-4xl font-black mb-2 text-green-400">{title}</h1>
         <p className="text-xl mb-4">{description}</p>
       </header>
       <main className="leading-6">
