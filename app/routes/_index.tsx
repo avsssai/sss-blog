@@ -53,7 +53,9 @@ export default function Index() {
         📙 currently reading - Midnight's Children <i>by Salman Rushdie</i>
       </div>
       <div className="my-8">
-        <h2 className="bg-green-400 w-fit font-bold mb-4">::blog::</h2>
+        <h2 className="bg-green-400 w-fit font-bold mb-4 text-black">
+          ::blog::
+        </h2>
         <ul>
           {blogs.map((blogData) => {
             return (
@@ -61,7 +63,7 @@ export default function Index() {
                 <Link to={`/blog/${blogData?.data.slug}`}>
                   <h3 className="flex items-center gap-4">
                     {" "}
-                    <i className="text-sm bg-green-200">
+                    <i className="text-sm bg-green-200 text-black">
                       {blogData?.data.createdAt}
                     </i>{" "}
                     {blogData?.data.title}

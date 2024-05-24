@@ -17,6 +17,7 @@
     "@remix-run/react": "^2.9.2",
     "@remix-run/serve": "^2.9.2",
     "@types/prismjs": "^1.26.4",
+    "clsx": "^2.1.1",
     "esbuild": "^0.21.3",
     "gray-matter": "^4.0.3",
     "isbot": "^4.1.0",
