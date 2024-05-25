@@ -8,15 +8,11 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import tailwindCss from "~/tailwind.css?url";
-import { Sun, Moon } from "react-feather";
+import { Sun, Moon, Home, Book, Menu } from "react-feather";
 
 // Supports weights 100-900
 import "@fontsource-variable/roboto-mono";
-import {
-  LinksFunction,
-  LoaderFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import { LinksFunction, LoaderFunction } from "@remix-run/node";
 import {
   NonFlashOfWrongThemeEls,
   ThemeProvider,
@@ -57,26 +53,49 @@ export function App() {
         <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
       </head>
       <body className="bg-white dark:bg-gray-900 dark:text-white">
-        <div className="px-4 lg:max-w-[550px] mx-auto font-mono">
+        <div className="px-4 lg:max-w-[550px] mx-auto font-mono flex-1">
           <div className="flex items-center gap-4 my-8">
-            <div className="rounded-sm h-8 w-8 bg-gray-500"></div>
+            <div className="rounded-sm h-10 w-10 relative">
+              <img
+                src="/bust-2.png"
+                alt="shiva caricature"
+                className="absolute h-full w-full"
+              />
+            </div>
             <h1 className="bg-green-400 font-bold text-black">
               <Link to={"/"}>Siva Sesha Sai</Link>
             </h1>
-            <div className="ml-auto">
-              <Moon
-                size={24}
-                onClick={() =>
-                  setTheme((prevTheme) =>
-                    prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-                  )
-                }
-              />
+            <div
+              className="ml-auto cursor-pointer"
+              onClick={() =>
+                setTheme((prevTheme) =>
+                  prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
+                )
+              }
+            >
+              {theme === Theme.DARK ? <Sun size={24} /> : <Moon size={24} />}
             </div>
           </div>
           <Outlet />
         </div>
 
+        {/* <footer className="text-center py-1 border-t-2 dark:border-white border-black">
+          <span>&#169;</span> Siva Sesha Sai
+          <br />
+          <span>{new Date().getFullYear()}</span>
+        </footer> */}
+        <footer className="fixed bottom-4 bg-slate-50 dark:bg-slate-800 flex justify-between w-[100px] left-1/2 translate-x-[-50px] shadow-2xl rounded-xl p-2">
+          <div>
+            <Link to={"/"}>
+              <Home size={24} />
+            </Link>
+          </div>
+          <div>
+            <Link to={"/blog"}>
+              <Book size={24} />
+            </Link>
+          </div>
+        </footer>
         <ScrollRestoration />
         <Scripts />
       </body>
