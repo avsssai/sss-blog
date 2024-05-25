@@ -47,10 +47,10 @@ export function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
         <Meta />
 
         <Links />
-        <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
       </head>
       <body className="bg-white dark:bg-gray-900 dark:text-white">
         <div className="px-4 lg:max-w-[550px] mx-auto font-mono flex-1">

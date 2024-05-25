@@ -34,3 +34,16 @@ export async function getAllBlogsData() {
   );
   return mainPageBlogsData.filter((item) => item !== null);
 }
+
+export const getAllTopics = async () => {
+  const allBlogData = await getAllBlogsData();
+  const allTopics = allBlogData.map((data) => data?.data.topic);
+  return allTopics;
+};
+
+export const getAllBlogsOnTopic = async (topic: string) => {
+  const allBlogsOnTopic = await getAllBlogsData();
+  return allBlogsOnTopic.filter(
+    (data) => data?.data.topic.toLowerCase() === topic.toLowerCase()
+  );
+};
